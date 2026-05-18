@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0f172a;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden; 
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.allow-scroll {
+  overflow-y: auto;
+}
+
+#root {
+  width: 100%;
+  z-index: 10;
+}
+
+.bg-blobs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: move 20s infinite alternate ease-in-out;
+}
+
+@keyframes move {
+  from { transform: translate(-20%, -20%) rotate(0deg); }
+  to { transform: translate(20%, 20%) rotate(360deg); }
+}
+
+.liquid-glass {
+  position: relative;
+  overflow: hidden;
+  z-index: 20;
+}
+
+/* Ensure LiquidGL canvas doesn't block interactions and stays in its layer */
+canvas[id^="liquidGL"] {
+  pointer-events: none !important;
+  z-index: 5 !important;
+  position: fixed !important;
+}
+
+.fixed.z-\[100\] {
+  z-index: 9999 !important;
+}
+
+h1, h2, h3, h4, h5, h6, .font-inter {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body.lock-scroll {
+  overflow: hidden !important;
+}
+
+
+/* Custom wobble animation utility */
+@keyframes wobble {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+  50% { transform: translate(1px, -1px) rotate(0.5deg); }
+  75% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.animate-wobble {
+  animation: wobble 4s ease-in-out infinite;
+}
+
+@keyframes wobble-extreme {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  10% { transform: translate(-5px, 5px) rotate(-2deg) scale(1.05); }
+  20% { transform: translate(10px, -10px) rotate(3deg) scale(0.95); }
+  30% { transform: translate(-15px, -5px) rotate(-4deg) scale(1.1); }
+  40% { transform: translate(5px, 15px) rotate(2deg) scale(0.9); }
+  50% { transform: translate(-10px, -10px) rotate(-3deg) scale(1.05); }
+  60% { transform: translate(15px, 5px) rotate(4deg) scale(0.95); }
+  70% { transform: translate(-5px, -15px) rotate(-2deg) scale(1.1); }
+  80% { transform: translate(10px, 10px) rotate(3deg) scale(0.9); }
+  90% { transform: translate(-10px, 5px) rotate(-1deg) scale(1.05); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+.animate-wobble-extreme {
+  animation: wobble-extreme 0.5s ease-in-out infinite;
+}
+
+/* Custom scrollbar for the repository dropdown */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
