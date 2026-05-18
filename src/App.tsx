@@ -243,7 +243,7 @@ function App() {
                 >
                   {activeTab === 'home' && <HomeTab skipIntro={true} introAnimation={introAnimation} isMaxWobble={isMaxWobble} />}
                   {activeTab === 'repos' && <ReposTab />}
-                  {activeTab === 'about' && <AboutTab onVoiceToggle={setIsVoicePlaying} />}
+                  {activeTab === 'about' && <AboutTab />}
                   {activeTab === 'twitter' && <TwitterTab />}
                 </motion.div>
               </AnimatePresence>

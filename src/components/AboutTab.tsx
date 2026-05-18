@@ -6,7 +6,7 @@ const AboutTab = () => {
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
     if (!showGames) {
       timer = setTimeout(() => setShowHint(true), 5000);
     } else {
