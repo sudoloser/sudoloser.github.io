@@ -1,106 +1,122 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-interface Subtitle {
-  start: number;
-  end: number;
-  text: string;
-}
-
-interface AboutTabProps {
-  onVoiceToggle?: (isPlaying: boolean) => void;
-}
-
-const AboutTab = ({ onVoiceToggle }: AboutTabProps) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const requestRef = useRef<number>();
+const AboutTab = () => {
+  const [showGames, setShowGames] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    onVoiceToggle?.(isPlaying);
-  }, [isPlaying, onVoiceToggle]);
-
-  const subtitles: Subtitle[] = useMemo(() => [
-    { start: 0.08, end: 5.08, text: "Hi, I'm sudoloser, a young developer trying to make the most of my time." },
-    { start: 5.08, end: 7.08, text: "It's true, I vibe code." },
-    { start: 7.08, end: 14.08, text: "But before you judge me for that, I thoroughly test all my code and I do not vibe code anything that requires root access." },
-    { start: 14.08, end: 21.079, text: "An exception, is shizuku app detection in axe, but that doesn't necessarily use root access." },
-    { start: 21.079, end: 24.75, text: "You know, it uses ADB." },
-    { start: 24.75, end: 29.75, text: "I vibe code things to make my life easier or to personalize apps to my liking." },
-    { start: 29.75, end: 34.75, text: "This means you don't have to use any of my projects as I build them with myself in mind." }
-  ], []);
-
-  const updateTime = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime);
-      requestRef.current = requestAnimationFrame(updateTime);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
-    };
-  }, []);
-
-  const togglePlay = () => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio('/about.mp3');
-      audioRef.current.onended = () => {
-        setIsPlaying(false);
-        if (requestRef.current) cancelAnimationFrame(requestRef.current);
-      };
-    }
-
-    if (isPlaying) {
-      audioRef.current.pause();
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    let timer: NodeJS.Timeout;
+    if (!showGames) {
+      timer = setTimeout(() => setShowHint(true), 5000);
     } else {
-      audioRef.current.play();
-      requestRef.current = requestAnimationFrame(updateTime);
+      setShowHint(false);
     }
-    setIsPlaying(!isPlaying);
+    return () => clearTimeout(timer);
+  }, [showGames]);
+
+  const handlePhoneClick = () => {
+    setShowHint(false);
+    setShowGames(true);
   };
 
-  const renderText = () => {
-    return subtitles.map((sub, subIdx) => {
-      const isSubActive = currentTime >= sub.start && currentTime <= sub.end;
-      
-      return (
-        <span 
-          key={subIdx} 
-          className={`block mb-4 transition-all duration-500 ${
-            isSubActive 
-              ? 'text-primary drop-shadow-[0_0_12px_rgba(56,189,248,0.8)] scale-[1.01] font-bold origin-left' 
-              : 'text-slate-400 opacity-60'
-          }`}
-        >
-          {sub.text}
-        </span>
-      );
-    });
+  const games = [
+    { name: 'Minecraft', icon: '/images/icons/minecraft.png' },
+    { name: 'NTE: Neverness To Everness', icon: '/images/icons/nte.png' },
+    { name: 'Fortnite', icon: '/images/icons/fortnite.png' },
+    { name: 'Rainbow Six Siege', icon: '/images/icons/r6s.png' },
+  ];
+
+  const variants = {
+    initial: { y: 50, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    exit: { y: -50, opacity: 0 }
   };
 
   return (
-    <div className="space-y-8 animate-wobble">
-      <section className="space-y-4">
-        <div className="flex items-center justify-between mb-8">
-          <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 font-inter">About Me</h3>
-          
-          <button
-            onClick={togglePlay}
-            className={`btn-flip ${isPlaying ? 'flipped' : ''}`}
-            data-front="Listen"
-            data-back="Pause"
-          />
+    <div className="w-full min-h-screen overflow-y-auto p-4 text-slate-200 scrollbar-hide">
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+        .scrollbar-hide { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+      `}</style>
+      
+      <section className="flex flex-col items-center justify-center gap-6 mt-8">
+        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 font-inter">About Me</h3>
+        <p className="text-lg leading-relaxed font-medium max-w-sm text-center">
+          Hi, I'm sudoloser. A young developer trying to make the most of my time.
+        </p>
+
+        <div className="relative w-full h-80 flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            {!showGames ? (
+              <motion.div 
+                key="phone"
+                variants={variants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="absolute flex flex-col items-center gap-2 cursor-pointer"
+                onClick={handlePhoneClick}
+              >
+                <p className="font-semibold text-center mt-2">Motorola G stylus 2024</p>
+                <img 
+                  src="/images/phone.png" 
+                  alt="Phone" 
+                  className="w-40 h-64 object-contain" 
+                />
+                <AnimatePresence>
+                  {showHint && (
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0 }}
+                      className="absolute top-1/2 left-3/4 text-white text-3xl"
+                      transition={{
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        duration: 0.5
+                      }}
+                    >
+                      👆
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <div className="flex items-center gap-2">
+                  <img src="/images/icons/derpfest.png" alt="OS" className="w-5 h-5" />
+                  <p className="text-xs text-slate-400">DerpFest (Android 16)</p>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div 
+                key="games"
+                variants={variants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="absolute flex flex-col items-center justify-center p-4"
+                onClick={() => setShowGames(false)}
+              >
+                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6 cursor-pointer">
+                  Favorite Games (Tap to return)
+                </h3>
+                <div className="grid grid-cols-2 gap-4 max-w-sm">
+                  {games.map((game) => (
+                    <div key={game.name} className="flex flex-col items-center gap-2 p-4 rounded-lg border border-white/5 bg-white/5">
+                      <img src={game.icon} alt={game.name} className="w-16 h-16 rounded-lg" />
+                      <span className="text-xs text-center">{game.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        <div className="space-y-2 text-lg sm:text-xl leading-relaxed font-medium font-inter">
-          {renderText()}
+        <div className="fixed bottom-6 flex gap-3">
+          <div className={`liquidGL animate-wobble w-3 h-3 rounded-full ${!showGames ? 'bg-white' : 'bg-slate-600'}`} />
+          <div className={`liquidGL animate-wobble w-3 h-3 rounded-full ${showGames ? 'bg-white' : 'bg-slate-600'}`} />
         </div>
       </section>
     </div>

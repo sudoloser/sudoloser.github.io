@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollWobble } from '../hooks/useScrollWobble';
-import { Menu, X, Home, Github, User } from 'lucide-react';
+import { Menu, X, Home, Github, User, Twitter } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -16,8 +16,8 @@ const formatTime = (seconds: number) => {
 };
 
 interface FloatingPillProps {
-  activeTab: 'home' | 'repos' | 'about';
-  onTabChange: (tab: 'home' | 'repos' | 'about') => void;
+  activeTab: 'home' | 'repos' | 'about' | 'twitter';
+  onTabChange: (tab: 'home' | 'repos' | 'about' | 'twitter') => void;
   onMaxWobble?: () => void;
   isMuted?: boolean;
   onMuteToggle?: () => void;
@@ -67,9 +67,10 @@ const FloatingPill = ({ activeTab, onTabChange, onMaxWobble, isMuted, onMuteTogg
     { id: 'home', label: 'Home', icon: Home },
     { id: 'repos', label: 'Repos', icon: Github },
     { id: 'about', label: 'About', icon: User },
+    { id: 'twitter', label: 'X Posts', icon: Twitter },
   ] as const;
 
-  const handleTabClick = (id: 'home' | 'repos' | 'about') => {
+  const handleTabClick = (id: 'home' | 'repos' | 'about' | 'twitter') => {
     onTabChange(id);
     setIsMenuOpen(false);
   };

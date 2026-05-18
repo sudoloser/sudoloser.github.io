@@ -6,6 +6,7 @@ import FloatingPill from './components/FloatingPill';
 import HomeTab from './components/HomeTab';
 import ReposTab from './components/ReposTab';
 import AboutTab from './components/AboutTab';
+import TwitterTab from './components/TwitterTab';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,7 +46,7 @@ const RainEffect = () => {
 
 function App() {
   const [introStep, setIntroStep] = useState(0); // 0: Hi, 1: Hi I'm, 2: Hi I'm sudoloser, 3: Complete
-  const [activeTab, setActiveTab] = useState<'home' | 'repos' | 'about'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'repos' | 'about' | 'twitter'>('home');
   const [isMaxWobble, setIsMaxWobble] = useState(false);
   
   // Audio State
@@ -243,6 +244,7 @@ function App() {
                   {activeTab === 'home' && <HomeTab skipIntro={true} introAnimation={introAnimation} isMaxWobble={isMaxWobble} />}
                   {activeTab === 'repos' && <ReposTab />}
                   {activeTab === 'about' && <AboutTab onVoiceToggle={setIsVoicePlaying} />}
+                  {activeTab === 'twitter' && <TwitterTab />}
                 </motion.div>
               </AnimatePresence>
             </main>
