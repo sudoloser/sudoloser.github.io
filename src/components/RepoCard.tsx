@@ -9,7 +9,8 @@ const RepoCard = ({ repo, index }: { repo: Repo, index: number }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05 }}
       whileHover={{ y: -4 }}
-      className="group relative p-5 bg-slate-900/40 border border-slate-700/50 rounded-2xl transition-all duration-300 overflow-hidden"
+      style={{ animationDelay: `${index * 0.2}s` }}
+      className="group relative p-5 bg-slate-900/40 border border-slate-700/50 rounded-2xl transition-all duration-300 overflow-hidden animate-wobble"
     >
       <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
         <ExternalLink size={16} className="text-slate-500" />

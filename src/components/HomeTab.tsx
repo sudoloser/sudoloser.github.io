@@ -14,16 +14,18 @@ const SocialLink = ({ icon: Icon, label, username, href }: { icon: any, label: s
     rel="noreferrer"
     whileHover={{ scale: 1.02, y: -2 }}
     whileTap={{ scale: 0.98 }}
-    className="flex items-center gap-3 p-3 bg-slate-800/40 border border-slate-700/50 rounded-xl hover:bg-slate-800/60 transition-colors group"
+    className="flex items-center gap-4 p-4 bg-slate-900/60 border border-slate-700/50 backdrop-blur-xl transition-all group no-underline rounded-2xl shadow-xl"
   >
-    <div className="p-2 bg-slate-700/30 rounded-lg text-slate-400 group-hover:text-primary transition-colors">
-      <Icon size={18} />
+    <div className="text-slate-400 group-hover:text-primary transition-colors">
+      <Icon size={20} />
     </div>
     <div className="flex flex-col">
-      <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold font-inter">{label}</span>
-      <span className="text-sm text-slate-200 font-medium">@{username}</span>
+      <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold font-inter">{label}</span>
+      <span className="text-sm text-slate-200 font-medium">{username}</span>
     </div>
-    <ExternalLink size={14} className="ml-auto text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+    <div className="ml-auto p-1 text-slate-600 group-hover:text-slate-400 transition-colors">
+      <ExternalLink size={12} />
+    </div>
   </motion.a>
 );
 

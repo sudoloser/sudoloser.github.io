@@ -1,0 +1,15 @@
+1 00:00:00,080 --> 00:00:05,080 Hi, I'm sudoloser, 
+a young developer trying to make the most of my 
+time. 2 00:00:05,080 --> 00:00:07,080 It's true, I 
+vibe code. 3 00:00:07,080 --> 00:00:14,080 But 
+before you judge me for that, I thoroughly test all 
+my code and I do not vibe code anything that 
+requires root access. 4 00:00:14,080 --> 
+00:00:21,079 An exception, is shizuku app detection 
+in axe, but that doesn't necessarily use root 
+access. 5 00:00:21,079 --> 00:00:24,750 You know, 
+it uses ADB. 6 00:00:24,750 --> 00:00:29,750 I vibe 
+code things to make my life easier or to 
+personalize apps to my liking. 7 00:00:29,750 --> 
+00:00:34,750 This means you don't have to use any 
+of my projects as I build them with myself in mind.

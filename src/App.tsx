@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -25,11 +25,36 @@ const introAnimation = {
   transition: { type: "spring", stiffness: 200, damping: 15 } 
 };
 
+const RainEffect = () => {
+  return (
+    <div className="rain">
+      {[...Array(50)].map((_, i) => (
+        <div
+          key={i}
+          className="drop"
+          style={{
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 2}s`,
+            animationDuration: `${0.5 + Math.random() * 0.5}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 function App() {
   const [introStep, setIntroStep] = useState(0); // 0: Hi, 1: Hi I'm, 2: Hi I'm sudoloser, 3: Complete
   const [activeTab, setActiveTab] = useState<'home' | 'repos' | 'about'>('home');
   const [isMaxWobble, setIsMaxWobble] = useState(false);
   
+  // Audio State
+  const [isMuted, setIsMuted] = useState(false);
+  const [isVoicePlaying, setIsVoicePlaying] = useState(false);
+  const [audioTime, setAudioTime] = useState(0);
+  const [audioDuration, setAudioDuration] = useState(0);
+  const musicRef = useRef<HTMLAudioElement | null>(null);
+
   const handleNextStep = () => {
     if (introStep < words.length) {
       setIntroStep(prev => prev + 1);
@@ -54,10 +79,43 @@ function App() {
     }
   }, [activeTab, introComplete]);
 
+  // Background Music Effect
+  useEffect(() => {
+    if (introComplete) {
+      if (!musicRef.current) {
+        musicRef.current = new Audio('/audio/music/lofi-1.mp3');
+        musicRef.current.loop = true;
+        musicRef.current.volume = 0.4;
+        
+        musicRef.current.addEventListener('loadedmetadata', () => {
+          setAudioDuration(musicRef.current?.duration || 0);
+        });
+        
+        musicRef.current.addEventListener('timeupdate', () => {
+          setAudioTime(musicRef.current?.currentTime || 0);
+        });
+      }
+
+      if (isMuted || isVoicePlaying) {
+        musicRef.current.pause();
+      } else {
+        musicRef.current.play().catch(e => console.log("Music play blocked:", e));
+      }
+    }
+    return () => {
+      if (musicRef.current) {
+        musicRef.current.pause();
+      }
+    };
+  }, [introComplete, isMuted, isVoicePlaying]);
+
   useEffect(() => {
     if (introComplete && window.liquidGL) {
       const timer = setTimeout(() => {
         try {
+          // Cleanup old canvases to prevent stacking/disappearing issues
+          document.querySelectorAll('canvas[id^="liquidGL"]').forEach(canvas => canvas.remove());
+          
           // Only init if targets exist
           const targets = document.querySelectorAll(".liquid-glass");
           if (targets.length > 0) {
@@ -74,7 +132,7 @@ function App() {
         } catch (e) {
           console.error("LiquidGL init failed:", e);
         }
-      }, isMaxWobble ? 100 : 1000); // Fast re-init for max wobble
+      }, isMaxWobble ? 100 : 2000); // Further increased delay for animation completion
       return () => clearTimeout(timer);
     }
   }, [introComplete, activeTab, isMaxWobble]);
@@ -88,6 +146,8 @@ function App() {
       )}
       onClick={!introComplete ? handleNextStep : undefined}
     >
+      <RainEffect />
+      
       <div className="bg-blobs">
         <div className={cn(
           "blob w-[500px] h-[500px] bg-primary top-[-10%] left-[-10%] animate-[move_25s_infinite_alternate]",
@@ -112,7 +172,15 @@ function App() {
             transition={{ type: "spring", stiffness: 50, damping: 12, delay: 0.5 }}
             className="fixed top-0 left-0 w-full z-[9999]"
           >
-            <FloatingPill activeTab={activeTab} onTabChange={setActiveTab} onMaxWobble={triggerMaxWobble} />
+            <FloatingPill 
+              activeTab={activeTab} 
+              onTabChange={setActiveTab} 
+              onMaxWobble={triggerMaxWobble}
+              isMuted={isMuted}
+              onMuteToggle={() => setIsMuted(!isMuted)}
+              audioTime={audioTime}
+              audioDuration={audioDuration}
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -160,7 +228,7 @@ function App() {
           </motion.div>
         ) : (
           <div className={cn(
-            "w-full flex flex-col items-center pt-24 sm:pt-32 pb-12 px-4 sm:px-6 z-10 min-h-screen justify-start transition-transform duration-300",
+            "w-full flex flex-col items-center pt-24 sm:pt-32 pb-12 px-4 sm:px-6 z-10 min-h-screen justify-start animate-wobble",
             isMaxWobble && "animate-wobble-extreme"
           )}>
             <main className="w-full max-w-2xl mt-8">
@@ -174,7 +242,7 @@ function App() {
                 >
                   {activeTab === 'home' && <HomeTab skipIntro={true} introAnimation={introAnimation} isMaxWobble={isMaxWobble} />}
                   {activeTab === 'repos' && <ReposTab />}
-                  {activeTab === 'about' && <AboutTab />}
+                  {activeTab === 'about' && <AboutTab onVoiceToggle={setIsVoicePlaying} />}
                 </motion.div>
               </AnimatePresence>
             </main>

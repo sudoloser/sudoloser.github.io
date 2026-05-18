@@ -7,7 +7,7 @@ const ReposTab = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 gap-4">
+      <div className="flex flex-col items-center justify-center py-24 gap-4 animate-wobble">
         <Loader2 className="animate-spin text-primary" size={32} />
         <p className="text-slate-500 font-medium">Fetching repositories...</p>
       </div>

@@ -65,6 +65,9 @@ body.allow-scroll {
   position: relative;
   overflow: hidden;
   z-index: 20;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  isolation: isolate;
 }
 
 /* Ensure LiquidGL canvas doesn't block interactions and stays in its layer */
@@ -134,4 +137,155 @@ body.lock-scroll {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #475569;
+}
+
+/* Rain Effect */
+.rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.drop {
+  position: absolute;
+  width: 1px;
+  height: 15px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
+  animation: fall 0.8s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* Mute Button - giannisrig inspired */
+.mute-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #38bdf8;
+  filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.4));
+}
+
+.mute-btn:hover {
+  color: #fb923c;
+  filter: drop-shadow(0 0 8px rgba(251, 146, 60, 0.6));
+}
+
+.mute-btn .speaker {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.mute-btn .speaker .icon {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.mute-btn .speaker .wave {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 14px;
+  border-right: 2px solid currentColor;
+  border-radius: 50%;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mute-btn.muted .wave {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.5);
+}
+
+.mute-btn .speaker .cross {
+  position: absolute;
+  left: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mute-btn.muted .cross {
+  opacity: 1;
+}
+
+/* Flip Button Styles */
+.btn-flip {
+  opacity: 1;
+  outline: 0;
+  color: #fff;
+  line-height: 32px;
+  position: relative;
+  text-align: center;
+  letter-spacing: 1px;
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 100px;
+}
+
+.btn-flip:hover:after,
+.btn-flip.flipped:after {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+.btn-flip:hover:before,
+.btn-flip.flipped:before {
+  opacity: 0;
+  transform: translateY(50%) rotateX(90deg);
+}
+
+.btn-flip:after {
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  color: #0f172a;
+  display: block;
+  transition: 0.5s;
+  position: absolute;
+  background: #38bdf8;
+  content: attr(data-back);
+  transform: translateY(-50%) rotateX(90deg);
+  border-radius: 4px;
+}
+
+.btn-flip:before {
+  top: 0;
+  left: 0;
+  opacity: 1;
+  color: #38bdf8;
+  display: block;
+  padding: 0 15px;
+  line-height: 32px;
+  transition: 0.5s;
+  position: relative;
+  background: #1e293b;
+  content: attr(data-front);
+  transform: translateY(0) rotateX(0);
+  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
