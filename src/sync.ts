@@ -33,6 +33,11 @@ async function main() {
   <meta charset="UTF-8">
   <meta http-equiv="refresh" content="0; url=${repo.html_url}">
   <title>Redirecting...</title>
+  <script>
+    var sub = window.location.search.slice(1);
+    var url = '${repo.html_url}' + (sub ? '/' + sub : '');
+    window.location.replace(url);
+  <\/script>
 </head>
 <body>
   <p>Redirecting to <a href="${repo.html_url}">${repo.full_name}</a>...</p>
