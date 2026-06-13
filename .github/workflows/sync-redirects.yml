@@ -26,13 +26,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: Enable pnpm
-        run: corepack enable && corepack prepare pnpm@9 --activate
+      - run: npm ci
 
-      - run: pnpm install
-
-      - run: pnpm sync
+      - run: npm run sync
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -42,7 +40,7 @@ jobs:
           file_pattern: public/r/
           skip_dirty_check: true
 
-      - run: pnpm run build
+      - run: npm run build
 
       - uses: actions/configure-pages@v5
 
