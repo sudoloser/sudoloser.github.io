@@ -23,17 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - run: pnpm install
+      - run: npm ci
 
-      - run: pnpm sync
+      - run: npm run sync
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -43,7 +40,7 @@ jobs:
           file_pattern: public/r/
           skip_dirty_check: true
 
-      - run: pnpm run build
+      - run: npm run build
 
       - uses: actions/configure-pages@v5
 
