@@ -84,7 +84,7 @@ const AboutTab = () => {
                 </AnimatePresence>
                 <div className="flex items-center gap-2">
                   <img src="/images/icons/derpfest.png" alt="OS" className="w-5 h-5" />
-                  <p className="text-xs text-slate-400">DerpFest (Android 16)</p>
+                  <p className="text-xs text-slate-400">Hello Moto OS (Android 15), former DerpFest user.</p>
                 </div>
               </motion.div>
             ) : (
