@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, ExternalLink, Github, Twitter, Instagram, Share2, Smartphone, Cpu, Battery, Database } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MapPin, ExternalLink, Twitter, Instagram, Share2 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -31,31 +30,6 @@ const SocialLink = ({ icon: Icon, label, username, href }: { icon: any, label: s
 );
 
 const HomeTab = ({ skipIntro = false, introAnimation = {}, isMaxWobble = false }: { skipIntro?: boolean, introAnimation?: any, isMaxWobble?: boolean }) => {
-  const [view, setView] = useState<'discord' | 'specs'>('discord');
-  const [stats, setStats] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const res = await fetch('https://fmanvkvojvgfrzvmofvb.supabase.co/rest/v1/phone_health?select=*&order=updated_at.desc&limit=1', {
-          headers: {
-            'apikey': 'sb_publishable_svGUx4oII8O-ORDI8C0DhQ_DVRcVcVb',
-            'Authorization': 'Bearer sb_publishable_svGUx4oII8O-ORDI8C0DhQ_DVRcVcVb'
-          }
-        });
-        const data = await res.json();
-        if (data[0]) setStats(data[0]);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    fetchStats();
-    const interval = setInterval(fetchStats, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const toGB = (mb: number) => (mb / 1024).toFixed(2);
-
   const terminalCommand = ["$", "echo", "\"Hi,", "I'm", "sudoloser\""];
   
   const socials = [
@@ -123,49 +97,12 @@ const HomeTab = ({ skipIntro = false, introAnimation = {}, isMaxWobble = false }
       </section>
 
       <section className="space-y-4">
-        <div className="relative group overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl shadow-2xl">
-          <AnimatePresence mode="wait">
-            {view === 'discord' ? (
-              <motion.div 
-                key="discord" 
-                initial={{ x: 50, opacity: 0 }} 
-                animate={{ x: 0, opacity: 1, rotate: isMaxWobble ? [0, -1, 1, 0] : 0 }} 
-                exit={{ x: -50, opacity: 0 }} 
-                drag="x" 
-                dragConstraints={{ left: 0, right: 0 }} 
-                onDragEnd={(_, info) => info.offset.x < -50 && setView('specs')} 
-                className="cursor-grab active:cursor-grabbing"
-              >
-                <img 
-                  src="https://lanyard.cnrad.dev/api/752899252866515025?showDisplayName=true&bg=0F172A" 
-                  className="w-full h-auto opacity-90" 
-                  alt="Discord Status"
-                />
-              </motion.div>
-            ) : (
-              <motion.div 
-                key="specs" 
-                initial={{ x: 50, opacity: 0 }} 
-                animate={{ x: 0, opacity: 1, rotate: isMaxWobble ? [0, 1, -1, 0] : 0 }} 
-                exit={{ x: -50, opacity: 0 }} 
-                drag="x" 
-                dragConstraints={{ left: 0, right: 0 }} 
-                onDragEnd={(_, info) => info.offset.x > 50 && setView('discord')} 
-                className="p-6 cursor-grab active:cursor-grabbing space-y-4"
-              >
-                <div className="flex items-center gap-3"><Smartphone size={20}/><span className="font-bold">Motorola G Stylus</span></div>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div><Database size={12}/> {stats ? toGB(stats.free_storage_mb) : '--'} GB</div>
-                  <div><Cpu size={12}/> {stats ? toGB(stats.free_ram_mb) : '--'} GB</div>
-                  <div><Battery size={12}/> {stats?.battery_percent}% {stats?.is_charging && '⚡'}</div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-            <div className={view === 'discord' ? "bg-primary w-4 h-1.5 rounded-full" : "bg-slate-700 w-1.5 h-1.5 rounded-full"} /> 
-            <div className={view === 'specs' ? "bg-primary w-4 h-1.5 rounded-full" : "bg-slate-700 w-1.5 h-1.5 rounded-full"} />
-          </div>
+        <div className="overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl shadow-2xl">
+          <img
+            src="https://lanyard.cnrad.dev/api/752899252866515025?showDisplayName=true&bg=0F172A"
+            className="w-full h-auto opacity-90"
+            alt="Discord Status"
+          />
         </div>
       </section>
     </div>
