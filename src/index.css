@@ -103,6 +103,23 @@ body.lock-scroll {
   animation: wobble 4s ease-in-out infinite;
 }
 
+/* Independent float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-wobble {
+    animation: none;
+  }
+}
+
 @keyframes wobble-extreme {
   0% { transform: translate(0, 0) rotate(0deg) scale(1); }
   10% { transform: translate(-5px, 5px) rotate(-2deg) scale(1.05); }

@@ -32,11 +32,11 @@ const TwitterTab = () => {
 
   return (
     <div className="h-[calc(100vh-140px)] overflow-y-auto pr-2 pb-20 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
-      <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 font-inter mb-6">X Posts</h3>
+      <h3 className="text-sm lg:text-base font-bold uppercase tracking-widest text-slate-500 font-inter mb-6">X Posts</h3>
       {loading ? (
         <div className="text-slate-400">Loading posts...</div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 lg:columns-2 lg:gap-4 lg:space-y-4">
           {posts.map((post, i) => {
             const isRepost = post.title.startsWith('RT');
             const content = post.description.replace(/<[^>]*>?/gm, '').replace(/https?:\/\/t\.co\/\S+/g, '');
@@ -49,14 +49,14 @@ const TwitterTab = () => {
                 href={post.link}
                 target="_blank"
                 rel="noreferrer"
-                className="block p-5 bg-slate-900/40 border border-slate-700/50 rounded-xl hover:border-slate-500 transition-all duration-300"
+                className="block p-5 lg:p-6 bg-slate-900/40 border border-slate-700/50 rounded-xl hover:border-slate-500 transition-all duration-300 break-inside-avoid"
               >
                 {isRepost && (
                   <div className="flex items-center gap-2 text-slate-500 text-[10px] mb-2 font-bold uppercase tracking-wider">
                     <Twitter size={10} /> Repost
                   </div>
                 )}
-                <p className="text-slate-200 text-sm leading-relaxed whitespace-pre-line">{content}</p>
+                <p className="text-slate-200 text-sm lg:text-base leading-relaxed whitespace-pre-line">{content}</p>
                 {image && (
                   <img 
                     src={image} 

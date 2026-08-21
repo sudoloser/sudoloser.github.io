@@ -194,7 +194,7 @@ function App() {
             transition={{ duration: 0.8, ease: "backIn" }}
             className="z-[1000] flex flex-col items-center justify-center gap-16 min-h-screen w-full"
           >
-            <div className="flex flex-wrap justify-center gap-x-4 sm:gap-x-8 px-6 text-center max-w-4xl">
+            <div className="flex flex-wrap justify-center gap-x-4 sm:gap-x-8 lg:gap-x-12 px-6 text-center max-w-4xl">
               {words.map((word, i) => (
                 <div key={i} className="relative min-w-fit py-4">
                   <motion.span
@@ -210,7 +210,7 @@ function App() {
                       rotate: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: i * 0.2 },
                       y: { repeat: Infinity, duration: 5, ease: "easeInOut", delay: i * 0.1 }
                     }}
-                    className="text-6xl sm:text-7xl md:text-9xl font-bold text-slate-100 font-inter select-none inline-block whitespace-nowrap"
+                    className="text-6xl sm:text-7xl md:text-9xl xl:text-[8rem] font-bold text-slate-100 font-inter select-none inline-block whitespace-nowrap"
                   >
                     {word}
                   </motion.span>
@@ -222,17 +222,17 @@ function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ repeat: Infinity, duration: 2 }}
-              className="text-slate-500 font-inter uppercase tracking-[0.2em] text-[10px] sm:text-xs z-[1001] mt-8"
+              className="text-slate-500 font-inter uppercase tracking-[0.2em] text-[10px] sm:text-xs lg:text-sm z-[1001] mt-8"
             >
               Click anywhere to continue
             </motion.div>
           </motion.div>
         ) : (
           <div className={cn(
-            "w-full flex flex-col items-center pt-24 sm:pt-32 pb-12 px-4 sm:px-6 z-10 min-h-screen justify-start animate-wobble",
+            "w-full flex flex-col items-center pt-24 sm:pt-32 lg:pt-36 xl:pt-40 pb-12 px-4 sm:px-6 lg:px-8 xl:px-12 z-10 min-h-screen justify-start animate-wobble",
             isMaxWobble && "animate-wobble-extreme"
           )}>
-            <main className="w-full max-w-2xl mt-8">
+            <main className="w-full max-w-2xl lg:max-w-5xl xl:max-w-6xl mt-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab}

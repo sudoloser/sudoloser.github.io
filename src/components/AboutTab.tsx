@@ -41,8 +41,8 @@ const AboutTab = () => {
       `}</style>
       
       <section className="flex flex-col items-center justify-center gap-6 mt-8">
-        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 font-inter">About Me</h3>
-        <p className="text-lg leading-relaxed font-medium max-w-sm text-center">
+        <h3 className="text-sm lg:text-base font-bold uppercase tracking-widest text-slate-500 font-inter">About Me</h3>
+        <p className="text-lg lg:text-xl xl:text-2xl leading-relaxed font-medium max-w-sm text-center">
           Hi, I'm sudoloser. A young developer trying to make the most of my time.
         </p>
 
@@ -63,7 +63,7 @@ const AboutTab = () => {
                 <img 
                   src="/images/phone.png" 
                   alt="Phone" 
-                  className="w-40 h-64 object-contain" 
+                  className="w-40 h-64 lg:w-48 lg:h-80 xl:w-56 xl:h-96 object-contain" 
                 />
                 <AnimatePresence>
                   {showHint && (
@@ -101,10 +101,10 @@ const AboutTab = () => {
                 <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6 cursor-pointer">
                   Favorite Games (Tap to return)
                 </h3>
-                <div className="grid grid-cols-2 gap-4 max-w-sm">
+                <div className="grid grid-cols-2 gap-4 lg:gap-6 max-w-sm lg:max-w-md">
                   {games.map((game) => (
-                    <div key={game.name} className="flex flex-col items-center gap-2 p-4 rounded-lg border border-white/5 bg-white/5">
-                      <img src={game.icon} alt={game.name} className="w-16 h-16 rounded-lg" />
+                    <div key={game.name} className="flex flex-col items-center gap-2 p-4 lg:p-5 rounded-lg border border-white/5 bg-white/5">
+                      <img src={game.icon} alt={game.name} className="w-16 h-16 lg:w-20 lg:h-20 rounded-lg" />
                       <span className="text-xs text-center">{game.name}</span>
                     </div>
                   ))}

@@ -23,9 +23,15 @@ const ReposTab = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       {repos.map((repo, index) => (
-        <RepoCard key={repo.id} repo={repo} index={index} />
+        <div
+          key={repo.id}
+          className="animate-float"
+          style={{ animationDelay: `${(index % 3) * 0.8}s`, animationDuration: `${6 + (index % 4) * 0.7}s` }}
+        >
+          <RepoCard repo={repo} index={index} />
+        </div>
       ))}
     </div>
   );

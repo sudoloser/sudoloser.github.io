@@ -14,7 +14,7 @@ const SocialLink = ({ icon: Icon, label, username, href }: { icon: any, label: s
     rel="noreferrer"
     whileHover={{ scale: 1.02, y: -2 }}
     whileTap={{ scale: 0.98 }}
-    className="flex items-center gap-4 p-4 bg-slate-900/60 border border-slate-700/50 backdrop-blur-xl transition-all group no-underline rounded-2xl shadow-xl"
+    className="flex items-center gap-4 p-4 lg:p-5 bg-slate-900/60 border border-slate-700/50 backdrop-blur-xl transition-all group no-underline rounded-2xl shadow-xl"
   >
     <div className="text-slate-400 group-hover:text-primary transition-colors">
       <Icon size={20} />
@@ -41,8 +41,8 @@ const HomeTab = ({ skipIntro = false, introAnimation = {}, isMaxWobble = false }
 
   return (
     <div className="space-y-12">
-      <section className="space-y-6">
-        <div className="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-2 items-center">
+      <section className="space-y-6 flex flex-col items-center text-center">
+        <div className="flex flex-wrap justify-center gap-x-3 sm:gap-x-4 gap-y-2 items-center">
           {terminalCommand.map((word, i) => (
             <div key={i} className="relative min-w-fit">
               <motion.span
@@ -81,30 +81,41 @@ const HomeTab = ({ skipIntro = false, introAnimation = {}, isMaxWobble = false }
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8 }}
-          className="flex items-center gap-2 text-slate-400 font-medium font-inter"
+          className="flex items-center gap-2 text-slate-400 font-medium font-inter text-sm lg:text-base"
         >
           <MapPin size={18} />
           <span>USA</span>
         </motion.div>
       </section>
 
-      <section className="space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {socials.map((social, i) => (
-            <SocialLink key={i} {...social} />
-          ))}
-        </div>
-      </section>
+      <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-5 lg:gap-12 lg:items-start">
+        <section className="lg:col-span-2">
+          <div className="flex flex-col gap-3 lg:gap-4">
+            {socials.map((social, i) => (
+              <div
+                key={i}
+                className="animate-float"
+                style={{ animationDelay: `${i * 0.7}s`, animationDuration: `${5.5 + i * 0.8}s` }}
+              >
+                <SocialLink {...social} />
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <section className="space-y-4">
-        <div className="overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl shadow-2xl">
-          <img
-            src="https://lanyard.cnrad.dev/api/752899252866515025?showDisplayName=true&bg=0F172A"
-            className="w-full h-auto opacity-90"
-            alt="Discord Status"
-          />
-        </div>
-      </section>
+        <section className="w-full lg:col-span-3">
+          <div
+            className="animate-float rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-xl shadow-2xl"
+            style={{ animationDelay: '1.2s', animationDuration: '7s' }}
+          >
+            <img
+              src="https://lanyard.cnrad.dev/api/752899252866515025?showDisplayName=true&bg=0F172A"
+              className="w-full h-auto opacity-90"
+              alt="Discord Status"
+            />
+          </div>
+        </section>
+      </div>
     </div>
   );
 };
