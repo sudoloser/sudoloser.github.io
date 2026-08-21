@@ -22,15 +22,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ds
+
+      - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: pnpm
 
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
 
-      - run: npm run sync
+      - run: pnpm run sync
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -38,8 +42,9 @@ jobs:
         with:
           commit_message: 'chore: sync repo redirects'
           file_pattern: public/r/
+          branch: ds
 
-      - run: npm run build
+      - run: pnpm run build
 
       - uses: actions/configure-pages@v5
 
