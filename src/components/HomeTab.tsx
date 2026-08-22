@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import DiscordWidget from './DiscordWidget';
 
 const socials = [
-  { label: 'X / Twitter', username: 'explysm', href: 'https://x.com/explysm' },
+  { label: 'X / Twitter', username: 'sudoloser', href: 'https://x.com/sudoloser' },
   { label: 'Reddit', username: 'Agreeable_Elk2698', href: 'https://www.reddit.com/u/Agreeable_Elk2698/s/8ZkJPOBUuV' },
   { label: 'TikTok', username: 'asnced', href: 'https://tiktok.com/@asnced' },
   { label: 'Instagram', username: 'huxhml', href: 'https://instagram.com/huxhml' },
