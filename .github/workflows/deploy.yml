@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Build the site, publish the output to the "built" branch, then deploy Pages from it
+name: Build and deploy
 
 on:
   # Runs on pushes targeting the ds branch
@@ -9,9 +9,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write # needed to push the built branch
   pages: write
   id-token: write
 
@@ -22,11 +21,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying; no separate build job needed for this simple case
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,14 +47,34 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      - name: Push dist to built branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: built
+          force_orphan: true
+          commit_message: "Build from ${{ github.sha }}"
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout built branch
+        uses: actions/checkout@v4
+        with:
+          ref: built
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: './dist'
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
