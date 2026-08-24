@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollWobble } from '../hooks/useScrollWobble';
-import { Menu, X, Home, Github, User, Twitter } from 'lucide-react';
+import { Menu, X, Home, Github, User, Twitter, Activity } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -68,6 +68,7 @@ const FloatingPill = ({ activeTab, onTabChange, onMaxWobble, isMuted, onMuteTogg
     { id: 'repos', label: 'Repos', icon: Github },
     { id: 'about', label: 'About', icon: User },
     { id: 'twitter', label: 'X Posts', icon: Twitter },
+    { id: 'status', label: 'Status', icon: Activity, href: 'https://sudoloser.hyperping.app' },
   ] as const;
 
   const handleTabClick = (id: 'home' | 'repos' | 'about' | 'twitter') => {
@@ -191,16 +192,32 @@ const FloatingPill = ({ activeTab, onTabChange, onMaxWobble, isMuted, onMuteTogg
             >
               {tabs.map((tab) => {
                 const Icon = tab.icon;
+                const sharedClass = cn(
+                  "flex items-center gap-3 px-4 py-2.5 lg:px-5 lg:py-3 rounded-xl transition-all duration-200 font-inter font-bold text-sm lg:text-base",
+                  activeTab === tab.id 
+                    ? "bg-slate-100 text-slate-900" 
+                    : "text-slate-400 hover:text-slate-100 hover:bg-slate-800"
+                );
+                if (tab.id === 'status') {
+                  return (
+                    <a
+                      key={tab.id}
+                      href={tab.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMenuOpen(false)}
+                      className={sharedClass}
+                    >
+                      <Icon size={16} className="lg:w-5 lg:h-5" />
+                      <span>{tab.label}</span>
+                    </a>
+                  );
+                }
                 return (
                   <button
                     key={tab.id}
                     onClick={() => handleTabClick(tab.id)}
-                    className={cn(
-                      "flex items-center gap-3 px-4 py-2.5 lg:px-5 lg:py-3 rounded-xl transition-all duration-200 font-inter font-bold text-sm lg:text-base",
-                      activeTab === tab.id 
-                        ? "bg-slate-100 text-slate-900" 
-                        : "text-slate-400 hover:text-slate-100 hover:bg-slate-800"
-                    )}
+                    className={sharedClass}
                   >
                     <Icon size={16} className="lg:w-5 lg:h-5" />
                     <span>{tab.label}</span>
