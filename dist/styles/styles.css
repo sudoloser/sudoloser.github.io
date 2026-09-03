@@ -13,8 +13,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 6rem 1rem; /* Adds safe spacing at the top and bottom */
+    padding: 7rem 1rem; /* Adds safe spacing at the top and bottom */
     box-sizing: border-box;
+}
+/* ------------------ */
+/*       Header       */
+/* ------------------ */
+.nav-tabs {
+    text-align: center;
+    font-size: x-large;
 }
 /* ------------------ */
 /*       Footer       */
@@ -81,14 +88,14 @@ body {
      display: flex;
      flex-direction: column;
      align-items: center;
-     gap: 0.02px; /* Adjust this to add more or less space between them */
+     gap: 0.02px; 
 }
 .repo-buttons {
      font-size: x-large;
      display: flex;
      flex-direction: column;
      align-items: center;
-     gap: 0.02px; /* Adjust this to add more or less space between them */
+     gap: 0.02px; 
 }
 .social-buttons {
     color: white;
