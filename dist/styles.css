@@ -1,5 +1,5 @@
 /* ------------------ */
-/* Global Styling */
+/*   Global Styling   */
 /* ------------------ */
 body {
     background: #FFF5F5;
@@ -13,8 +13,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 4rem 1rem; /* Adds safe spacing at the top and bottom */
+    padding: 6rem 1rem; /* Adds safe spacing at the top and bottom */
     box-sizing: border-box;
+}
+/* ------------------ */
+/*       Footer       */
+/* ------------------ */
+.footer {
+    text-align: center;
 }
 /* ------------------ */
 /* Centred Hello Text */
