@@ -1,0 +1,117 @@
+/* ------------------ */
+/* Global Styling */
+/* ------------------ */
+body {
+    background: #FFF5F5;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    /* Fix overflow scrolling & center content safely */
+    min-height: 125vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 1rem; /* Adds safe spacing at the top and bottom */
+    box-sizing: border-box;
+}
+/* ------------------ */
+/* Centred Hello Text */
+/* ------------------ */
+.sudoloser-text { 
+    font-size: xxx-large;
+    color: #4A4A4A;
+    text-align: center;
+}
+.hello {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+.rounded-divider {
+  width: 50%;             /* Adjust length of the line */
+  height: 6px;            /* Controls line thickness */
+  background-color: #4A4A4A; /* Line color */
+  border: none;           /* Removes browser default border */
+  border-radius: 10px;    /* Rounds the line edges */
+  margin: 2rem auto;      /* Centers line horizontally with vertical spacing */
+}
+/* ------------------ */
+/* About Me */
+/* ------------------ */
+.about-me-center {
+    text-align: center;
+}
+.about-me-down-arrow {
+    font-size: 25px;
+}
+.about-me {
+    text-align: left;
+}
+.about-me-learn {
+    text-align: center;
+    font-size: xx-large;
+    color: #4A4A4A;
+}
+.about-me-description {
+    font-size: x-large;
+    color: #4A4A4A;
+}
+.about-me-end {
+    text-align: center;
+}
+.languages {
+    color: white;
+    background-color: #4A4A4A;
+    padding: 1px;
+    border-radius: 5px 5px 5px 5px;
+}
+/* ------------------ */
+/* Socials */
+/* ------------------ */
+.about-me-buttons {
+     font-size: x-large;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 0.02px; /* Adjust this to add more or less space between them */
+}
+.repo-buttons {
+     font-size: x-large;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 0.02px; /* Adjust this to add more or less space between them */
+}
+.social-buttons {
+    color: white;
+    background-color: #4A4A4A;
+    padding: 2px;
+    border-radius: 5px 5px 5px 5px;
+
+    text-decoration: none;
+    font-weight: bold;
+}
+/* ------------------ */
+/* WebKit/Blink Rounded Scrollbar */
+/* ------------------ */s
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffddf8;
+  border-radius: 10px; /* Rounds the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c098c3;
+  border-radius: 10px; /* Rounds the handle */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* ------------------ */
