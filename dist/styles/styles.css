@@ -16,6 +16,30 @@ body {
     padding: 7rem 1rem; /* Adds safe spacing at the top and bottom */
     box-sizing: border-box;
 }
+.link {
+    text-decoration: none;
+}
+/* ------------------ */
+/* WebKit/Blink Rounded Scrollbar */
+/* ------------------ */s
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffddf8;
+  border-radius: 10px; /* Rounds the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c098c3;
+  border-radius: 10px; /* Rounds the handle */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 /* ------------------ */
 /*       Header       */
 /* ------------------ */
@@ -106,25 +130,13 @@ body {
     text-decoration: none;
     font-weight: bold;
 }
-/* ------------------ */
-/* WebKit/Blink Rounded Scrollbar */
-/* ------------------ */s
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+/* ---------------------------------*/
+/* workflow (./workflow/index.html) */
+/* ---------------------------------*/
 
-::-webkit-scrollbar-track {
-  background: #ffddf8;
-  border-radius: 10px; /* Rounds the track */
+.workflow-operating-systems-buttons {
+    font-size: x-large;
 }
-
-::-webkit-scrollbar-thumb {
-  background: #c098c3;
-  border-radius: 10px; /* Rounds the handle */
+.workflow-operating-systems-text {
+    text-align: center;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-/* ------------------ */
