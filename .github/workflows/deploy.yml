@@ -28,7 +28,9 @@ jobs:
 
       - name: Move public contents to dist
         run: mv public/* dist/
-        run: mv design-language dist/
+        
+      - name: mv design language to dist
+      - run: mv design-language dist/
 
       - name: Push dist to built branch
         uses: peaceiris/actions-gh-pages@v4
