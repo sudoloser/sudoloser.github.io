@@ -64,7 +64,7 @@ body {
   background-color: var(--sl-surface);
   padding: 1px 6px;
   border-radius: var(--sl-radius-sm);
-  font-size: var(--sl-text-sm);
+  font-size: var(--sl-text-lg);
 }
 
 .sl-divider {

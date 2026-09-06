@@ -1,0 +1,70 @@
+.section-buttons {
+    font-size: x-large;
+    text-align: center;
+}
+.section-tags {
+    font-size: x-large;
+    text-align: center;
+}
+.section-palette {
+    font-size: medium;
+    text-align: center;
+
+    display: grid;
+    place-items: center;
+    
+}
+
+.palette-card {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: var(--sl-radius-md);
+
+    padding: 5px;
+
+    width: 100px;
+    height: 100px; 
+}
+.palette-card1 {
+    background-color: var(--sl-bg);
+    border-color: var(--sl-text);
+}
+.palette-card2 {
+    background-color: var(--sl-bg-soft);
+    border-color: var(--sl-text);
+}
+.palette-card3 {
+    background-color: var(--sl-text);
+    border-color: var(--sl-bg-soft);
+    color: var(--sl-text-inverse);
+}
+.palette-card4 {
+    background-color: var(--sl-accent);
+    border-color: var(--sl-text);
+    color: var(--sl-text-inverse);
+}
+.palette-card5 {
+    background-color: var(--sl-accent-hover);
+    border-color: var(--sl-text);
+    color: var(--sl-text-inverse);
+}
+.palette-card6 {
+    background-color: var(--sl-accent-pressed);
+    border-color: var(--sl-text);
+    color: var(--sl-text-inverse);
+}
+.palette-card7 {
+    background-color: var(--sl-divider);
+    border-color: var(--sl-text);
+    color: var(--sl-text-inverse);
+}
+.palette-card8 {
+    background-color: var(--sl-surface);
+    border-color: var(--sl-text-inverse);
+    color: var(--sl-text-inverse);
+}
+.palette-card9 {
+    background-color: var(--sl-surface-hover);
+    border-color: var(--sl-text-inverse);
+    color: var(--sl-text-inverse);
+}

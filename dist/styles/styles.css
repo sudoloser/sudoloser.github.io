@@ -52,6 +52,10 @@ body {
 /* ------------------ */
 .footer {
     text-align: center;
+    text-decoration: none;
+}
+.footer-dots {
+    color: #000000;
 }
 /* ------------------ */
 /* Centred Hello Text */
