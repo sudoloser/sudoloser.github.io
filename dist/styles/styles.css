@@ -18,6 +18,7 @@ body {
 }
 .link {
     text-decoration: none;
+    color: #868484;
 }
 /* ------------------ */
 /* WebKit/Blink Rounded Scrollbar */
@@ -102,7 +103,7 @@ body {
 .about-me-end {
     text-align: center;
 }
-.languages {
+.tag {
     color: white;
     background-color: #4A4A4A;
     padding: 1px;

@@ -12,8 +12,36 @@
 
     display: grid;
     place-items: center;
-    
 }
+
+/* ------ TEXTS ------ */
+.section-text {
+    font-size: medium;
+    text-align: center;
+
+    display: grid;
+    place-items: center;
+}
+
+.section-text-card {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: var(--sl-radius-md);
+
+    padding: 5px;
+
+    width: 100px;
+    height: 100px; 
+}
+.section-text-card1 {
+    background-color: var(--sl-bg);
+    border-color: var(--sl-text);
+}
+.section-text-card2 {
+    background-color: var(--sl-bg);
+    border-color: var(--sl-text);
+}
+
 
 .palette-card {
     border-width: 2px;
