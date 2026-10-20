@@ -39,7 +39,7 @@ jobs:
         with:
           commit_message: 'chore: sync repo redirects'
           file_pattern: public/r/
-          branch: ds
+          branch: minimalistic
 
       - name: Trigger build and deploy workflow
         if: steps.autocommit.outputs.changes_detected == 'true' || github.event_name == 'workflow_dispatch'
