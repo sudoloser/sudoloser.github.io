@@ -1,5 +1,7 @@
 # sudoloser.github.io | Branch: minimalistic
 
+> [!NOTE]
+> This website was **assisted** by ai. It still remains human first.
 
 **Minimalistic human-first rewrite of my personal site.**
 
