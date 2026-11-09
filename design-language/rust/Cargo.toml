@@ -1,0 +1,8 @@
+[package]
+name = "sudoloser-design"
+version = "1.0.0"
+edition = "2021"
+description = "sudoloser design language palette for Rust apps"
+license = "MIT"
+
+[dependencies]
